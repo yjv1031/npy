@@ -14,12 +14,26 @@ function getJsonCodeData(code, category, url = '/ma1a11-masterdata/masterdata') 
     .then((response) => { return response.data.result}  );
 }
 
+//코드성 데이터 value, text 어레이리스트로 리턴
+// [EX] M8AC012110 그리드 selectBox 출력 예제
+function setConditionCode(param) {
+  //value text
+  let result = [];
+  for(var key in param) {
+    result.push({ value: key, text: param[key] }); 
+  }
+  return result;  
+}
+
 export default {
   getCodeName,
   getJsonCodeData,
+  setConditionCode,
 }
 
 export {
   getCodeName,
   getJsonCodeData,
+  setConditionCode,
 }
+
