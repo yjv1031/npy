@@ -14,26 +14,41 @@ function getJsonCodeData(code, category, url = '/ma1a11-masterdata/masterdata') 
     .then((response) => { return response.data.result}  );
 }
 
+// 코드성 json data를 selectOptions 에 맞는 형태({value:'',text:''})형태로 리턴함
+function getJsonCodeData2(code, category, url = '/ma1a11-masterdata/masterdata') {
+  return axios.get(`${url}/${code}/${category}`)
+    .then((response) => {
+    const result = [];
+      for(let key in response.data.result) {
+        const temp = {'value': key, 'text': response.data.result[key]};
+        result.push(temp);
+      }
+      return result;
+    }
+  );
+}
+
 //코드성 데이터 value, text 어레이리스트로 리턴
 // [EX] M8AC012110 그리드 selectBox 출력 예제
 function setConditionCode(param) {
   //value text
   let result = [];
   for(var key in param) {
-    result.push({ value: key, text: param[key] }); 
+    result.push({ value: key, text: param[key] });
   }
-  return result;  
+  return result;
 }
 
 export default {
   getCodeName,
   getJsonCodeData,
+  getJsonCodeData2,
   setConditionCode,
 }
 
 export {
   getCodeName,
   getJsonCodeData,
+  getJsonCodeData2,
   setConditionCode,
 }
-
