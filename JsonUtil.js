@@ -39,11 +39,27 @@ function setConditionCode(param) {
   return result;
 }
 
+//파이프로 전달되는 스트링(CD,NAME)에 대하여 {value:'',text:''} 어레이리스트로 리턴
+//단 cdChar 와 nameChar는 각 스트링에 대한 구분 기호를 의미한다.
+function setSplitData(cd, name, cdChar, nameChar) {
+  //value text
+  let result = [];
+  let cdList = cd.split(cdChar);
+  let nameList = name.split(nameChar);
+  cdList.forEach((temp,i) => {
+    if( nameList[i] !== undefined){
+      result.push({ value: temp, text: nameList[i]});
+    }
+  });
+  return result;
+}
+
 export default {
   getCodeName,
   getJsonCodeData,
   getJsonCodeData2,
   setConditionCode,
+  setSplitData,
 }
 
 export {
@@ -51,4 +67,5 @@ export {
   getJsonCodeData,
   getJsonCodeData2,
   setConditionCode,
+  setSplitData,
 }
