@@ -26,14 +26,26 @@ function diffDateSecond(startDate, endDate) {
   return result;
 }
 
+//undefined or null 일경우 false를 반환한다.
+function isNotNull(param) {
+  return param === undefined || param === null ? false : true;
+}
+
+//undefined or null 일경우 false를 반환한다.
+function isNotNull(param) {
+  return param === undefined || param === null ? false : true;
+}
+
 export default {
     getParameterByName,
     changeDateToString,
     diffDateSecond,
+    isNotNull,
 }
 
 export {
     getParameterByName,
     changeDateToString,
     diffDateSecond,
+    isNotNull,
 }
