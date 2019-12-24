@@ -31,9 +31,9 @@ function isNotNull(param) {
   return param === undefined || param === null ? false : true;
 }
 
-//undefined or null 일경우 false를 반환한다.
-function isNotNull(param) {
-  return param === undefined || param === null ? false : true;
+//배열이 아닐 경우 false를 반환한다.
+function isArray(param) {
+  return param === undefined || param === null || !Array.isArray(param) ? false : true;
 }
 
 export default {
@@ -41,6 +41,7 @@ export default {
     changeDateToString,
     diffDateSecond,
     isNotNull,
+    isArray,
 }
 
 export {
@@ -48,4 +49,5 @@ export {
     changeDateToString,
     diffDateSecond,
     isNotNull,
+    isArray,
 }
