@@ -1,3 +1,6 @@
+import qs from 'qs';
+import { auth } from '@mes/mes-ui-react';
+
 //겟방식 파라미터 전달에 대하여 값을 리턴한다.
 // ex) 'http://url~~~~~~~~?aa=123&bb=535'
 // getParameterByName('bb') 는 파라미터 bb의 값인 535를 리턴한다.
@@ -36,12 +39,36 @@ function isArray(param) {
   return param === undefined || param === null || !Array.isArray(param) ? false : true;
 }
 
+//로그인 유저의 창고코드를 리턴한다.
+async function getChangGoCode(thisPram) {
+  let code='';
+  return await auth.getAllUserInfo()
+    .then((allUserInfo) => {
+      const key = getQueryVariable('NS_RKEY',thisPram);
+      const lovList = isNotNull(allUserInfo) && isNotNull(allUserInfo.opWorkLocation) ? allUserInfo.opWorkLocation[key] : [];
+      if (isArray(lovList) && lovList.length > 0) {
+        code = lovList[0];
+      }
+      else{
+        code = '';
+      }
+      return code;
+    });
+}
+
+function getQueryVariable(variable,thisPram) {
+  const params = qs.parse(thisPram.props.location.search, { ignoreQueryPrefix: true });
+  const securityValue = params[variable];
+  return securityValue;
+}
+
 export default {
     getParameterByName,
     changeDateToString,
     diffDateSecond,
     isNotNull,
     isArray,
+    getChangGoCode,
 }
 
 export {
@@ -50,4 +77,5 @@ export {
     diffDateSecond,
     isNotNull,
     isArray,
+    getChangGoCode,
 }
