@@ -1,10 +1,15 @@
 import axios from 'axios';
+import su from './StringUtil';
 
 // value, text로 이루어진 코드성 Json에서 text를 반환한다.
 // (코드성데이터 Json에서, 찾으려는 text에 대한 value)
 // [EX] M8GE010450 > store.js > codeMapping 메소드
 function getCodeName(jsonArray, value) {
-  return jsonArray.find( (idx) => idx.value === value ).text;
+  if(su.isArray(jsonArray)){
+    return su.isNotNull(jsonArray.find( (idx) => idx.value === value )) ? jsonArray.find( (idx) => idx.value === value ).text : value;
+  } else {
+    return '';
+  }
 }
 
 // 코드성 json data 가져옴
@@ -47,7 +52,7 @@ function setSplitData(cd, name, cdChar, nameChar) {
   let cdList = cd.split(cdChar);
   let nameList = name.split(nameChar);
   cdList.forEach((temp,i) => {
-    if( nameList[i] !== undefined){
+    if( su.isNotNull(nameList[i]) ){
       result.push({ value: temp, text: nameList[i]});
     }
   });
