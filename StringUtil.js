@@ -97,6 +97,24 @@ function getQueryVariable(variable,thisPram) {
   return securityValue;
 }
 
+function isJson(str) {
+  const objCon = ({}).constructor;
+  try {
+    if(typeof str === 'object') {
+      if(str.constructor === objCon) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      console.log('false');
+      return false;
+    }
+  } catch (e) {
+    console.log("error");
+      return false;
+  }
+}
 
 export default {
     getParameterByName,
@@ -106,6 +124,7 @@ export default {
     isArray,
     getChangGoCode,
     getUserInfo,
+    isJson,
 }
 
 
@@ -117,4 +136,5 @@ export {
     isArray,
     getChangGoCode,
     getUserInfo,
+    isJson,
 }
